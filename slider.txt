@@ -1,0 +1,181 @@
+
+
+<body>
+  <section class="project-slider">
+    <h2 class="slider-heading">Projects :</h2>
+    <div class="slider-container" id="slider">
+      <div class="slide">
+        <img src="WeCare Hospital - Cover.png" alt="Brand Improvement Strategy" />
+        <p class="caption">Brand Improvement Strategy :</p>
+      </div>
+      <div class="slide">
+        <img src="images/strategy.png" alt="Strategy" />
+        <p class="caption">Market Research :</p>
+      </div>
+      <div class="slide">
+        <img src="images/branding.png" alt="Branding" />
+        <p class="caption">Branding</p>
+      </div>
+      <div class="slide">
+        <img src="images/ad.png" alt="Campaign" />
+        <p class="caption">Campaign</p>
+      </div>
+    </div>
+    <p class="swipe-hint">Swipe →</p>
+  </section>
+
+  <script>
+    // Touch-swipe functionality
+    const slider = document.getElementById("slider");
+    let isDown = false;
+    let startX, scrollLeft;
+
+    slider.addEventListener("mousedown", (e) => {
+      isDown = true;
+      slider.classList.add("active");
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener("mouseleave", () => {
+      isDown = false;
+      slider.classList.remove("active");
+    });
+
+    slider.addEventListener("mouseup", () => {
+      isDown = false;
+      slider.classList.remove("active");
+    });
+
+    slider.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      slider.scrollLeft = scrollLeft - walk;
+    });
+
+    slider.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].pageX;
+      scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener("touchmove", (e) => {
+      const x = e.touches[0].pageX;
+      const walk = (x - startX) * 1.5;
+      slider.scrollLeft = scrollLeft - walk;
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+/* Project Slider Bar Code */
+
+
+
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: whitesmoke;
+  color: #111;
+}
+
+.project-slider {
+  padding: 6rem 4rem ;
+  margin-bottom: 4rem;
+  text-align: center;
+  background-color: whitesmoke;
+  overflow: hidden;
+}
+
+.slider-heading {
+  font-size: 3rem;
+  margin-bottom: 5rem;
+  font-family: var(--font-ptserif) ;
+  font-weight: 500;
+  color: var(--colour-main);
+}
+
+.slider-container {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+}
+
+.slide {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 1.2rem rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  max-width: 100%;
+}
+
+.slide img {
+  width: 100%;
+  border-radius: 1rem 1rem 0 0;
+  height: auto;
+  display: block;
+}
+
+.caption {
+  padding: 10px;
+  font-size: 1.4rem;
+  font-family: Font-Mandrel, var(--font-ptserif);
+  font-weight: 500;
+  color: var(--colour-main);
+  margin: 0;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
+}
+
+.swipe-hint {
+  display: none;
+  font-size: 2rem;
+  color: #0f766e;
+  margin-top: 10px;
+}
+
+
+
+
+/* Responsiveness */
+
+
+
+@media (min-width: 1024px) {
+  .slide {
+    width: calc(100% / 3 - 14px);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .slide {
+    width: calc(100% / 2 - 10px);
+  }
+}
+
+@media (max-width: 767px) {
+  .slide {
+    width: 100%;
+  }
+}
+
+
+
+
+
